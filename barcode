@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Печать штрихкода</title>
+</head>
+<body onload="printBarcode()">
+  <!-- Здесь штрихкод -->
+  <img id="barcode" src="" alt="Штрихкод">
+  <script>
+    // Функция для получения параметра из URL
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Функция для генерации и печати штрихкода
+    function printBarcode() {
+      const aggregatedCode = getQueryParam('data');
+      if (aggregatedCode) {
+        // Устанавливаем URL для изображения штрихкода
+        document.getElementById('barcode').src = `https://barcode.orcascan.com/?type=code128&data=${aggregatedCode}`;
+        // Автоматически вызываем печать
+        window.print();
+      } else {
+        alert('Код упаковки не передан.');
+      }
+    }
+  </script>
+</body>
+</html>
